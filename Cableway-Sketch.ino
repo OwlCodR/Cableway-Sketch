@@ -18,9 +18,9 @@ AccelStepper STEPPER1(1, 2, 3); // (Driver, Step, Direction)
 AccelStepper STEPPER2(1, 4, 5);
 AccelStepper STEPPER3(1, 6, 7);
 
-#define STEPPER1_ENABLE A1
-#define STEPPER2_ENABLE A2
-#define STEPPER3_ENABLE A3
+#define STEPPER1_ENABLE 22
+#define STEPPER2_ENABLE 23
+#define STEPPER3_ENABLE 24
 
 // DOWN MOTORS //
 
@@ -115,12 +115,20 @@ void setup() {
   pinMode(MOTOR6_IN1, OUTPUT);
   pinMode(MOTOR6_IN2, OUTPUT);
   
+  pinMode(STEPPER1_ENABLE, OUTPUT);
+  pinMode(STEPPER2_ENABLE, OUTPUT);
+  pinMode(STEPPER3_ENABLE, OUTPUT);
+  
   digitalWrite(MOTOR4_IN1, LOW);
   digitalWrite(MOTOR4_IN2, LOW);
   digitalWrite(MOTOR5_IN1, LOW);
   digitalWrite(MOTOR5_IN2, LOW);
   digitalWrite(MOTOR6_IN1, LOW);
   digitalWrite(MOTOR6_IN2, LOW);
+
+  digitalWrite(STEPPER1_ENABLE, LOW);
+  digitalWrite(STEPPER2_ENABLE, LOW);
+  digitalWrite(STEPPER3_ENABLE, LOW);
 }
 
 void loop() {
@@ -150,14 +158,17 @@ void loop() {
                     if (direct == '-') {
                         switch(mNumber) {
                             case 1: {
+                                digitalWrite(STEPPER1_ENABLE, HIGH);
                                 STEPPER1.move(-DISTANCE);
                                 break;
                             }
                             case 2: {
+                                digitalWrite(STEPPER2_ENABLE, HIGH);
                                 STEPPER2.move(-DISTANCE);
                                 break;
                             }
                             case 3: {
+                                digitalWrite(STEPPER3_ENABLE, HIGH);
                                 STEPPER3.move(-DISTANCE);
                                 break;
                             }
@@ -166,14 +177,17 @@ void loop() {
                     else {
                         switch(mNumber) {
                             case 1: {
+                                digitalWrite(STEPPER1_ENABLE, HIGH);
                                 STEPPER1.move(DISTANCE);
                                 break;
                             }
                             case 2: {
+                                digitalWrite(STEPPER2_ENABLE, HIGH);
                                 STEPPER2.move(DISTANCE);
                                 break;
                             }
                             case 3: {
+                                digitalWrite(STEPPER3_ENABLE, HIGH);
                                 STEPPER3.move(DISTANCE);
                                 break;
                             }
@@ -182,15 +196,15 @@ void loop() {
                 } else {
                   switch(mNumber) {
                             case 1: {
-                                STEPPER1.move(0);
+                                digitalWrite(STEPPER1_ENABLE, LOW);
                                 break;
                             }
                             case 2: {
-                                STEPPER2.move(0);
+                                digitalWrite(STEPPER2_ENABLE, LOW);
                                 break;
                             }
                             case 3: {
-                                STEPPER3.move(0);
+                                digitalWrite(STEPPER3_ENABLE, LOW);
                                 break;
                             }
                         }
