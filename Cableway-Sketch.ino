@@ -25,19 +25,79 @@ AccelStepper STEPPER3(1, 6, 7);
 // DOWN MOTORS //
 
 // UP MOTORS //
-#define MOTOR4_IN1 48
-#define MOTOR4_IN2 49
+#define MOTOR4_IN1 34
+#define MOTOR4_IN2 35
 
-#define MOTOR5_IN1 50
-#define MOTOR5_IN2 51
+#define MOTOR5_IN1 36
+#define MOTOR5_IN2 37
 
-#define MOTOR6_IN1 52
-#define MOTOR6_IN2 53
+#define MOTOR6_IN1 38
+#define MOTOR6_IN2 39
 // UP MOTORS //
+
+void beep(int ton, int time)
+{
+  tone(46, ton, time);
+  delay(time + 20);
+}
+
+void play()
+{
+const int speakerPin = 46;
+
+const int c = 261;
+const int d = 294;
+const int e = 329;
+const int f = 349;
+const int g = 391;
+const int gS = 415;
+const int a = 440;
+const int aS = 455;
+const int b = 466;
+const int cH = 523;
+const int cSH = 554;
+const int dH = 587;
+const int dSH = 622;
+const int eH = 659;
+const int fH = 698;
+const int fSH = 740;
+const int gH = 784;
+const int gSH = 830;
+const int aH = 880;
+  
+    noTone(speakerPin);
+    beep(a, 500);
+    beep(a, 500);
+    beep(a, 500);
+    beep(f, 350);
+    beep(cH, 150);
+    beep(a, 500);
+    beep(f, 350);
+    beep(cH, 150);
+    beep(a, 650);
+
+    delay(150);
+
+
+    beep(eH, 500);
+    beep(eH, 500);
+    beep(eH, 500);
+    beep(fH, 350);
+    beep(cH, 150);
+    beep(gS, 500);
+    beep(f, 350);
+    beep(cH, 150);
+    beep(a, 650);
+
+    noTone(speakerPin);  // Отключаем спикер
+    delay(10); // Задержка в мс после которой цикл повторится по новой
+}
 
 void setup() {    
   bluetooth.begin(9600);
   Serial.begin(9600);
+
+  play();
 
   STEPPER1.setMaxSpeed(STEPPER_MAX_SPEED);
   STEPPER1.setAcceleration(STEPPER_ACCELERATION);
