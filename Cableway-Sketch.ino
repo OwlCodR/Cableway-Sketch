@@ -18,9 +18,9 @@ AccelStepper STEPPER1(1, 2, 3); // (Driver, Step, Direction)
 AccelStepper STEPPER2(1, 4, 5);
 AccelStepper STEPPER3(1, 6, 7);
 
-#define STEPPER1_ENABLE 22
-#define STEPPER2_ENABLE 23
-#define STEPPER3_ENABLE 24
+#define STEPPER1_ENABLE A0
+#define STEPPER2_ENABLE A1
+#define STEPPER3_ENABLE A2
 
 // DOWN MOTORS //
 
@@ -126,9 +126,9 @@ void setup() {
   digitalWrite(MOTOR6_IN1, LOW);
   digitalWrite(MOTOR6_IN2, LOW);
 
-  digitalWrite(STEPPER1_ENABLE, LOW);
-  digitalWrite(STEPPER2_ENABLE, LOW);
-  digitalWrite(STEPPER3_ENABLE, LOW);
+  digitalWrite(STEPPER1_ENABLE, HIGH);
+  digitalWrite(STEPPER2_ENABLE, HIGH);
+  digitalWrite(STEPPER3_ENABLE, HIGH);
 }
 
 void loop() {
@@ -158,17 +158,17 @@ void loop() {
                     if (direct == '-') {
                         switch(mNumber) {
                             case 1: {
-                                digitalWrite(STEPPER1_ENABLE, HIGH);
+                                digitalWrite(STEPPER1_ENABLE, LOW);
                                 STEPPER1.move(-DISTANCE);
                                 break;
                             }
                             case 2: {
-                                digitalWrite(STEPPER2_ENABLE, HIGH);
+                                digitalWrite(STEPPER2_ENABLE, LOW);
                                 STEPPER2.move(-DISTANCE);
                                 break;
                             }
                             case 3: {
-                                digitalWrite(STEPPER3_ENABLE, HIGH);
+                                digitalWrite(STEPPER3_ENABLE, LOW);
                                 STEPPER3.move(-DISTANCE);
                                 break;
                             }
@@ -177,17 +177,17 @@ void loop() {
                     else {
                         switch(mNumber) {
                             case 1: {
-                                digitalWrite(STEPPER1_ENABLE, HIGH);
+                                digitalWrite(STEPPER1_ENABLE, LOW);
                                 STEPPER1.move(DISTANCE);
                                 break;
                             }
                             case 2: {
-                                digitalWrite(STEPPER2_ENABLE, HIGH);
+                                digitalWrite(STEPPER2_ENABLE, LOW);
                                 STEPPER2.move(DISTANCE);
                                 break;
                             }
                             case 3: {
-                                digitalWrite(STEPPER3_ENABLE, HIGH);
+                                digitalWrite(STEPPER3_ENABLE, LOW);
                                 STEPPER3.move(DISTANCE);
                                 break;
                             }
@@ -196,15 +196,15 @@ void loop() {
                 } else {
                   switch(mNumber) {
                             case 1: {
-                                digitalWrite(STEPPER1_ENABLE, LOW);
+                                digitalWrite(STEPPER1_ENABLE, HIGH);
                                 break;
                             }
                             case 2: {
-                                digitalWrite(STEPPER2_ENABLE, LOW);
+                                digitalWrite(STEPPER3_ENABLE, HIGH);
                                 break;
                             }
                             case 3: {
-                                digitalWrite(STEPPER3_ENABLE, LOW);
+                                digitalWrite(STEPPER3_ENABLE, HIGH);
                                 break;
                             }
                         }
@@ -248,7 +248,6 @@ void loop() {
             Serial.println("TOO SHORT COMMAND!");
         }
     }
-
     STEPPER1.run();
     STEPPER2.run();
     STEPPER3.run();
