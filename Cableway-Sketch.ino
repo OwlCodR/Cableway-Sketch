@@ -1,7 +1,7 @@
 #include <SoftwareSerial.h>
 #include <AccelStepper.h>
 
-SoftwareSerial bluetooth(13, 12);
+SoftwareSerial bluetooth(11, 10);
 
 #define COMMAND_MIN_LENGTH 3
 #define MOTOR_DIRECTION 0
@@ -14,9 +14,9 @@ SoftwareSerial bluetooth(13, 12);
 
 // DOWN MOTORS //
 
-AccelStepper STEPPER1(1, 42, 43); // (Driver, Step, Direction)
-AccelStepper STEPPER2(1, 44, 45);
-AccelStepper STEPPER3(1, 46, 47);
+AccelStepper STEPPER1(1, 2, 3); // (Driver, Step, Direction)
+AccelStepper STEPPER2(1, 4, 5);
+AccelStepper STEPPER3(1, 6, 7);
 
 #define STEPPER1_ENABLE A1
 #define STEPPER2_ENABLE A2
@@ -91,12 +91,15 @@ void loop() {
                         switch(mNumber) {
                             case 1: {
                                 STEPPER1.move(-DISTANCE);
+                                break;
                             }
                             case 2: {
                                 STEPPER2.move(-DISTANCE);
+                                break;
                             }
                             case 3: {
                                 STEPPER3.move(-DISTANCE);
+                                break;
                             }
                         }
                     }
@@ -104,25 +107,31 @@ void loop() {
                         switch(mNumber) {
                             case 1: {
                                 STEPPER1.move(DISTANCE);
+                                break;
                             }
                             case 2: {
                                 STEPPER2.move(DISTANCE);
+                                break;
                             }
                             case 3: {
                                 STEPPER3.move(DISTANCE);
+                                break;
                             }
                         }
                     }
                 } else {
                   switch(mNumber) {
                             case 1: {
-                                STEPPER1.move(-((STEPPER_MAX_SPEED ^ 2) / (2 * STEPPER_ACCELERATION)));
+                                STEPPER1.move(0);
+                                break;
                             }
                             case 2: {
-                                STEPPER2.move(STEPPER2.currentPosition()+1);
+                                STEPPER2.move(0);
+                                break;
                             }
                             case 3: {
-                                STEPPER3.move(STEPPER3.currentPosition()+1);
+                                STEPPER3.move(0);
+                                break;
                             }
                         }
                 }
