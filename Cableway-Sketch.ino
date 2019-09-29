@@ -1,7 +1,7 @@
 #include <SoftwareSerial.h>
 #include <AccelStepper.h>
 
-SoftwareSerial bluetooth(11, 10);
+SoftwareSerial bluetooth(10, 11);
 
 #define COMMAND_MIN_LENGTH 3
 #define MOTOR_DIRECTION 0
@@ -97,6 +97,14 @@ void setup() {
   bluetooth.begin(9600);
   Serial.begin(9600);
 
+  pinMode(STEPPER1_ENABLE, OUTPUT);
+  pinMode(STEPPER2_ENABLE, OUTPUT);
+  pinMode(STEPPER3_ENABLE, OUTPUT);
+
+  digitalWrite(STEPPER1_ENABLE, HIGH);
+  digitalWrite(STEPPER2_ENABLE, HIGH);
+  digitalWrite(STEPPER3_ENABLE, HIGH);
+
   play();
 
   STEPPER1.setMaxSpeed(STEPPER_MAX_SPEED);
@@ -115,20 +123,12 @@ void setup() {
   pinMode(MOTOR6_IN1, OUTPUT);
   pinMode(MOTOR6_IN2, OUTPUT);
   
-  pinMode(STEPPER1_ENABLE, OUTPUT);
-  pinMode(STEPPER2_ENABLE, OUTPUT);
-  pinMode(STEPPER3_ENABLE, OUTPUT);
-  
   digitalWrite(MOTOR4_IN1, LOW);
   digitalWrite(MOTOR4_IN2, LOW);
   digitalWrite(MOTOR5_IN1, LOW);
   digitalWrite(MOTOR5_IN2, LOW);
   digitalWrite(MOTOR6_IN1, LOW);
   digitalWrite(MOTOR6_IN2, LOW);
-
-  digitalWrite(STEPPER1_ENABLE, HIGH);
-  digitalWrite(STEPPER2_ENABLE, HIGH);
-  digitalWrite(STEPPER3_ENABLE, HIGH);
 }
 
 void loop() {
@@ -169,7 +169,7 @@ void loop() {
                             }
                             case 3: {
                                 digitalWrite(STEPPER3_ENABLE, LOW);
-                                STEPPER3.move(-DISTANCE);
+                                STEPPER3.move(DISTANCE);
                                 break;
                             }
                         }
@@ -188,7 +188,7 @@ void loop() {
                             }
                             case 3: {
                                 digitalWrite(STEPPER3_ENABLE, LOW);
-                                STEPPER3.move(DISTANCE);
+                                STEPPER3.move(-DISTANCE);
                                 break;
                             }
                         }
@@ -200,7 +200,7 @@ void loop() {
                                 break;
                             }
                             case 2: {
-                                digitalWrite(STEPPER3_ENABLE, HIGH);
+                                digitalWrite(STEPPER2_ENABLE, HIGH);
                                 break;
                             }
                             case 3: {
